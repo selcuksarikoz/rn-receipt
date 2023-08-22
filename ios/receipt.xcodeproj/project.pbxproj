@@ -488,7 +488,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = receipt/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ReceiptAI";
+				INFOPLIST_KEY_CFBundleDisplayName = "Receipt AI";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,7 +517,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = receipt/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ReceiptAI";
+				INFOPLIST_KEY_CFBundleDisplayName = "Receipt AI";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
