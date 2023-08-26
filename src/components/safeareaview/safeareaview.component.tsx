@@ -1,16 +1,10 @@
-import { SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native";
 
-interface IAppSafeAreaViewProps {
-  children: JSX.Element;
-}
+import { AppSafeAreaModule } from "./safeareaview.interfaces"
 
-export function AppSafeAreaView(props: IAppSafeAreaViewProps) {
+import { styles } from "./safeareview.style"
+
+export function AppSafeAreaView(props: AppSafeAreaModule.IAppSafeAreaViewProps) {
   const { children } = props;
   return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

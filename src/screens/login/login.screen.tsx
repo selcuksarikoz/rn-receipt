@@ -1,14 +1,12 @@
 import { Text } from "react-native";
-import { AppSafeAreaView } from "../../components";
-import { useEffect, useLayoutEffect } from "react";
-import type { StackScreenProps } from "@react-navigation/stack";
+import { useLayoutEffect } from "react";
 
-interface IAppLoginScreenProps extends StackScreenProps<any> {
+import { AppSafeAreaView } from "@components";
 
-}
+import { AppScreen } from "./login.interfaces";
 
-export function AppLoginScreen(props: IAppLoginScreenProps) {
-  
+export function AppLoginScreen(props: AppScreen.IAppLoginScreenProps) {
+
   const { navigation } = props;
 
   useLayoutEffect(() => {

@@ -1,24 +1,28 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
+  TouchableNativeFeedback,
   useColorScheme,
   View,
 } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { AppSafeAreaView } from "../../components";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faMugSaucer } from "@fortawesome/free-solid-svg-icons";
+
+import { AppSafeAreaView } from "@components";
+import { AppTags } from "@components/tags";
+import { AppFood } from "@components/food";
+import { Lang } from "@utils/langs";
+
+import { styles } from "./home.style"
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export function AppHomeScreen(): JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const [materials, setMaterials] = useState<Set<string>>()
+
+  // const backgroundStyle = {
+  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  // };
 
   useLayoutEffect(() => {
     StatusBar.setBarStyle(isDarkMode ? "light-content" : "dark-content")
@@ -28,17 +32,32 @@ export function AppHomeScreen(): JSX.Element {
     <AppSafeAreaView>
 
       <View style={styles.container}>
-        <Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis nesciunt ratione consectetur quos, officia odio itaque rerum quis cumque sint odit, amet voluptatem. Nam, unde blanditiis natus sunt a corrupti.
+        
+          <View style={styles.header}>
+            <AppTags 
+              onChange={setMaterials}
+            />
 
-        </Text>
+          {
+            materials?.size ? (
+              <TouchableOpacity
+                style={styles.button}
+              >
+                <Text>{Lang.t("Search")}</Text>
+              </TouchableOpacity>
+            ) : null
+          }
+          </View>
+
+        <View style={styles.list}>
+          <AppFood />
+          <AppFood />
+          <AppFood />
+          <AppFood />
+        </View>
+
       </View>
 
     </AppSafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-});

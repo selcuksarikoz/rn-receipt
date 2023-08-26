@@ -500,7 +500,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nectionai.receipt;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.nectionai.receipt;
 				PRODUCT_NAME = receipt;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

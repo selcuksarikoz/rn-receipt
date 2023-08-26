@@ -2,18 +2,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { faHome, faStar, faGear } from "@fortawesome/pro-solid-svg-icons";
-
-import { AppHomeScreen } from "../home";
-import { AppFavoritesScreen } from "../favorites";
-import { AppSettingsScreen } from "../settings";
-import { AppLoginScreen } from "../login";
-import { AppRegisterScreen } from "../register";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+
+import { AppHomeScreen, AppFavoritesScreen, AppSettingsScreen, AppLoginScreen, AppRegisterScreen } from "@screens";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Home() {
+function HomeScreenTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -21,6 +17,7 @@ function Home() {
         component={AppHomeScreen}
         options={{
           tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faHome} color={color} />,
+          headerShown: false
         }}
       />
       <Tab.Screen
@@ -49,7 +46,7 @@ export function AppProxyScreen() {
         <Stack.Screen name="Register" component={AppRegisterScreen} />
         <Stack.Screen
           name="Main"
-          component={Home}
+          component={HomeScreenTabs}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
