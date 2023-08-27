@@ -11,7 +11,6 @@ const icon = {
 export const styles = StyleSheet.create({
   container: {
     display: "flex",
-    flex:1,
     position: "relative",
   },
   leftIcon: {

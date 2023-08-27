@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { faHome, faStar, faGear } from "@fortawesome/pro-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { NativeBaseProvider } from "native-base";
 
 import { AppHomeScreen, AppFavoritesScreen, AppSettingsScreen, AppLoginScreen, AppRegisterScreen } from "@screens";
 
@@ -40,16 +41,20 @@ function HomeScreenTabs() {
 
 export function AppProxyScreen() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={AppLoginScreen} />
-        <Stack.Screen name="Register" component={AppRegisterScreen} />
-        <Stack.Screen
-          name="Main"
-          component={HomeScreenTabs}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={AppLoginScreen} options={{
+            headerShown: false
+          }}/>
+          <Stack.Screen name="Register" component={AppRegisterScreen} />
+          <Stack.Screen
+            name="Main"
+            component={HomeScreenTabs}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }

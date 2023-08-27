@@ -1,3 +1,5 @@
 export * from "./safeareaview"
 export * from "./input"
 export * from "./tags"
+export * from "./button"
+export * from "./food"

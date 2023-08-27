@@ -1,4 +1,11 @@
 {
   "Search": "Search",
-  "FoodAddPlaceholder": "Add material..."
+  "FoodAddPlaceholder": "Add material...",
+  "UsernamePlaceholder": "Username example@domain.com",
+  "Username": "Username",
+  "Password": "Password",
+  "Login": "Login",
+  "Register": "Register",
+  "ForgotPassword": "ForgotPassword",
+  "EmailAddress": "Email Address"
 }

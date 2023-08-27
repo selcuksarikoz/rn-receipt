@@ -7,14 +7,18 @@ import { styles } from "./input.style"
 
 export function AppInput(props: AppInputModule.IAppInputProps) {
 
-  const { leftIcon, rightIcon } = props
+  const { leftIcon, rightIcon, innerRef, ...rest } = props
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         autoCorrect={false}
+        autoCapitalize="none"
         returnKeyLabel={Lang.t("Search")}
+        ref={innerRef}
+
+        {...rest}
       />
       {leftIcon && (
         <View style={styles.leftIcon}>{leftIcon}</View>

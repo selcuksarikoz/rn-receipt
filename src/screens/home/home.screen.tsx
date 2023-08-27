@@ -7,13 +7,15 @@ import {
   View,
 } from "react-native";
 
-import { AppSafeAreaView } from "@components";
+import { AppSafeAreaView, AppButton } from "@components";
 import { AppTags } from "@components/tags";
 import { AppFood } from "@components/food";
 import { Lang } from "@utils/langs";
 
 import { styles } from "./home.style"
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Http } from "@utils";
+import { Colors, URLS } from "@constants";
+import { Button, Container, Flex, ScrollView, VStack } from "native-base";
 
 export function AppHomeScreen(): JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
@@ -28,35 +30,51 @@ export function AppHomeScreen(): JSX.Element {
     StatusBar.setBarStyle(isDarkMode ? "light-content" : "dark-content")
   }, [])
 
+  function fetchSearch(){
+    const results = Http().Get<IFoodItemRequest, IFoodItem[]>(URLS.search, {
+      limit: 1,
+      text: "asdasd"
+    })
+  }
+
   return (
     <AppSafeAreaView>
 
-      <View style={styles.container}>
+      <Flex style={styles.container}>
         
-          <View style={styles.header}>
+          <Flex 
+            p={2}
+            backgroundColor={Colors.primary}
+            width={"100%"}
+            style={{gap: 10}}
+          >
             <AppTags 
               onChange={setMaterials}
             />
 
           {
             materials?.size ? (
-              <TouchableOpacity
-                style={styles.button}
+              <Button
+                size={"sm"}
+                variant={"subtle"}
+                onPress={fetchSearch}
               >
-                <Text>{Lang.t("Search")}</Text>
-              </TouchableOpacity>
+                {Lang.t("Search")}
+              </Button>
             ) : null
           }
-          </View>
+          </Flex>
 
-        <View style={styles.list}>
-          <AppFood />
-          <AppFood />
-          <AppFood />
-          <AppFood />
-        </View>
+        <ScrollView flex={2}>
+          <VStack space={3} p={3}>
+            <AppFood />
+            <AppFood />
+            <AppFood />
+            <AppFood />
+          </VStack>
+        </ScrollView>
 
-      </View>
+      </Flex>
 
     </AppSafeAreaView>
   );

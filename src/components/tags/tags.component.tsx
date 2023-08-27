@@ -1,15 +1,16 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { TextInput, View, TouchableOpacity, Button, Text, ScrollView } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { TextInput, View } from "react-native";
+import { Button, Flex, Input, ScrollView, VStack } from "native-base";
 
 import { Lang } from "@utils/langs"
-
 import { AppTagsModule } from "./tags.interfaces";
+import { Http } from "@utils";
+import { URLS } from "@constants";
 
 import { styles } from "./tags.style"
 
 const MAX_ITEM = 10
+const DEFAULT_MATERIALS = ["rice", "egg", "potatoe"]
 
 export function AppTags(props: AppTagsModule.IAppTagsProps) {
 
@@ -19,6 +20,10 @@ export function AppTags(props: AppTagsModule.IAppTagsProps) {
   const [newValue, setNewValue] = useState<string>()
 
   const inputRef = useRef<TextInput>()
+
+  useEffect(() => {
+
+  }, [])
 
   useEffect(() => {
     onChange?.(items)
@@ -62,14 +67,12 @@ export function AppTags(props: AppTagsModule.IAppTagsProps) {
       >
         <View style={styles.scrollView}>
           {
-            ["1", "2", "34", "2222"].filter(it => !items.has(it)).map((it) => (
+            DEFAULT_MATERIALS.filter(it => !items.has(it)).map((it) => (
               <AppTags.TagItem
                 key={it}
                 value={it}
-                onClose={(e) => console.log(e)}
                 onPress={addNewItem}
-                showCloseBtn={false}
-                isDisabled={items.has(it)}
+                size={"sm"}
               />
             ))
           }
@@ -81,18 +84,18 @@ export function AppTags(props: AppTagsModule.IAppTagsProps) {
   const disableAddItem = items.size <= MAX_ITEM
 
   return (
-    <View style={styles.container}>
+    <VStack space={3} width={"100%"}>
 
       {disableAddItem ? (
         <RecommendationsView />
       ) : null}
 
-      <View style={styles.wrapper}>
+      <Flex style={styles.wrapper} width={"100%"} p={3}>
         {
           [...items].map((it, index) => (
             <AppTags.TagItem
               key={it}
-              onClose={onCloseTagItem}
+              onPress={onCloseTagItem}
               value={it}
             />
           ))
@@ -100,9 +103,10 @@ export function AppTags(props: AppTagsModule.IAppTagsProps) {
 
         {
           disableAddItem ? (
-            <TextInput
+            <Input
+              p={1.5}
               ref={inputRef}
-              style={styles.input}
+              width={120}
               value={newValue || ""}
               onChangeText={setNewValue}
               onSubmitEditing={addItem}
@@ -115,32 +119,22 @@ export function AppTags(props: AppTagsModule.IAppTagsProps) {
             />
           ) : null
         }
-      </View>
-    </View>
+      </Flex>
+    </VStack>
   )
 }
 
 export module AppTags {
   export const TagItem = memo((props: AppTagsModule.ITagItemProps) => {
-    const { onClose, value, showCloseBtn = true, onPress, isDisabled } = props
+    const { value, onPress, size = "md" } = props
     return (
-      <View style={styles.tagItem}>
-        <TouchableOpacity
-          disabled={isDisabled}
-          onPress={() => onPress?.(value)}
-          style={styles.button}
-        >
-          <Text>{value}</Text>
-        </TouchableOpacity>
-
-        {
-          showCloseBtn ? (
-            <TouchableOpacity onPress={() => onClose(value)} style={styles.closeButton}>
-              <FontAwesomeIcon icon={faClose} />
-            </TouchableOpacity>
-          ) : null
-        }
-      </View>
+      <Button onPress={() => onPress?.(value)} size={size} py={1}>
+        {value}
+      </Button>
     )
   })
+}
+
+function getRecommendations(): Promise<IPopularSearch[]>{
+  return Http().Get(URLS.popular_search)
 }
