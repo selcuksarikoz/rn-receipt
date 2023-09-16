@@ -1,3 +1,5 @@
 export * from "./debounce-throotle"
 export * from "./http"
 export * from "./langs"
+export * from "./local-cache"
+export * from "./lru-cache"

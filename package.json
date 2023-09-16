@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator=iPhone14 && sh node_modules/react-native/scripts/launchPackager.command",
     "lint": "eslint .",
     "start": "react-native start",
     "clean": "yarn --reset-cache && watchman watch-del-all",
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.3",
     "@react-native-masked-view/masked-view": "^0.2.9",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
@@ -23,10 +24,12 @@
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.12.1",
     "react-native-i18n": "^2.0.15",
+    "react-native-ionicons": "^4.6.5",
     "react-native-keychain": "^8.1.2",
     "react-native-reanimated": "^3.4.2",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "^3.24.0",
+    "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "12.1.1",
     "styled-components": "^6.0.7"
   },

@@ -3,6 +3,7 @@ import { IButtonComponentType } from "native-base/lib/typescript/components/prim
 export module AppTagsModule {
   export interface IAppTagsProps {
     onChange: (items: Readonly<Set<string>>) => void;
+    loading?: boolean
   }
 
   export interface ITagItemProps {

@@ -1,8 +1,7 @@
 import { KeyboardAvoidingView, Platform, Text, TextInput } from "react-native";
 import { useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faRightToBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Button, Box, Divider, FormControl, Input, VStack, WarningOutlineIcon } from "native-base";
+import Icon from "react-native-ionicons";
 
 import { AppSafeAreaView } from "@components";
 import { RegisterModule } from "./register.interface";
@@ -98,7 +97,7 @@ export function AppRegisterScreen(props: RegisterModule.IAppRegisterScreen) {
               backgroundColor={isDisabled ? "gray.400" : undefined}
               disabled={isDisabled}
               onPress={onSubmit}
-              rightIcon={<FontAwesomeIcon color={Colors.white} icon={faRightToBracket} />}
+              rightIcon={<Icon name="star" />}
             >
               {Lang.t("Register")}
             </Button>

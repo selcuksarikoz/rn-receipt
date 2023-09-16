@@ -1,4 +1,4 @@
-const BASE_URL = __DEV__ ? "http://localhost:5000" : "https://asdasdasd"
+const BASE_URL = __DEV__ ? "http://localhost/api" : "https://asdasdasd"
 export const URLS = {
   "login": `${BASE_URL}/login`,
   "register": `${BASE_URL}/register`,

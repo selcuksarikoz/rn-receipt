@@ -10,21 +10,17 @@ import { URLS } from "@constants";
 import { styles } from "./tags.style"
 
 const MAX_ITEM = 10
-const DEFAULT_MATERIALS = ["rice", "egg", "potatoe"]
+const DEFAULT_MATERIALS = ["rice", "egg", "potatoe", "banana", "milk", "coffee", "sugar"]
 
 export function AppTags(props: AppTagsModule.IAppTagsProps) {
 
-  const { onChange } = props
+  const { onChange, loading } = props
 
   const [items, setItems] = useState<Set<string>>(new Set())
   const [newValue, setNewValue] = useState<string>()
 
   const inputRef = useRef<TextInput>()
-
-  useEffect(() => {
-
-  }, [])
-
+  
   useEffect(() => {
     onChange?.(items)
   }, [items])
@@ -67,7 +63,7 @@ export function AppTags(props: AppTagsModule.IAppTagsProps) {
       >
         <View style={styles.scrollView}>
           {
-            DEFAULT_MATERIALS.filter(it => !items.has(it)).map((it) => (
+            DEFAULT_MATERIALS.map((it) => (
               <AppTags.TagItem
                 key={it}
                 value={it}

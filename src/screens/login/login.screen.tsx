@@ -1,10 +1,8 @@
 import { KeyboardAvoidingView, Platform } from "react-native";
 import { useRef, useState } from "react";
-import FastImage from "react-native-fast-image";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faKey, faRightToBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { TextInput } from "react-native-gesture-handler";
-import { Box, Button, Container, Divider, Flex, FormControl, Input, VStack, WarningOutlineIcon } from "native-base";
+import { Box, Button, Divider, FormControl, Input, VStack, WarningOutlineIcon } from "native-base";
+import Icon from "react-native-ionicons";
 
 import { AppSafeAreaView } from "@components";
 import { Lang } from "@utils";
@@ -102,7 +100,7 @@ export function AppLoginScreen(props: LoginModule.IAppLoginScreenProps) {
               backgroundColor={isDisabled ? "gray.400" : undefined}
               disabled={isDisabled}
               onPress={onSubmit}
-              rightIcon={<FontAwesomeIcon color={Colors.white} icon={faRightToBracket} />}
+              rightIcon={<Icon name="star" />}
             >
               {Lang.t("Login")}
             </Button>

@@ -1,5 +1,6 @@
 export module AppFoodModule {
-  export interface IAppFood {
-    
+  export interface IAppFoodProps {
+    detail: IFoodItem
+    onPress: (item: IFoodItem) => void
   }
 }

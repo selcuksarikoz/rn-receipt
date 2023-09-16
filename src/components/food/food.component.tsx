@@ -1,17 +1,42 @@
-import { memo } from "react";
-import { Image, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { memo, useEffect, useState } from "react";
 import FastImage from "react-native-fast-image";
+import Icon from "react-native-ionicons";
+import { Box, Button, IconButton, Stack, Text, View } from "native-base";
 
+import { LocalCache } from "@utils/local-cache";
 import { AppFoodModule } from "./food.interfaces";
 
 import { styles } from "./food.style"
 
-function AppFoodImpl(props: AppFoodModule.IAppFood) {
+function AppFoodImpl(props: AppFoodModule.IAppFoodProps) {
+
+  const { detail, onPress } = props
+
+  const [favorited, setFavorited] = useState(false)
+
+  useEffect(() => {
+    checkFavorited()
+  }, [])
+
+  async function checkFavorited(){
+    const c = await LocalCache.getData(detail.id.toString())
+    setFavorited(!!c)
+  }
+
+  async function _setFavorited(){
+    const has = await LocalCache.getData(detail.id.toString())
+    if(!has) {
+      setFavorited(true)
+      await LocalCache.setData(detail.id.toString(), props.detail)
+      return
+    }
+
+    await LocalCache.removeItem(detail.id.toString())
+    setFavorited(false)
+  }
+
   return (
-    <View style={styles.container}>
+    <Box style={styles.container}>
       <FastImage
         source={{
           uri: 'https://unsplash.it/400/400?image=1',
@@ -22,20 +47,21 @@ function AppFoodImpl(props: AppFoodModule.IAppFood) {
         style={styles.image}
       />
 
-      <View style={styles.wrapper}>
-          <View style={styles.title}>
-            <Text>
-              Etli Yaprak Sarması
+      <Stack flex={1} p={2}>
+          <View alignContent={"center"} flexDirection={"row"} justifyContent={"space-between"}>
+            <Text numberOfLines={2} maxWidth={"80%"} pt={1} onPress={() => onPress(props.detail)}>
+              {detail.title}
             </Text>
-            <View>
-              <TouchableOpacity>
-                <FontAwesomeIcon icon={faStar} />
-              </TouchableOpacity>
-            </View>
+            <Button
+              onPress={_setFavorited}
+              variant={"ghost"}
+            >
+              <Icon size={18} name={favorited ? "star" : "star-outline"} />
+            </Button>
           </View>
-      </View>
-    </View>
+      </Stack>
+    </Box>
   )
 }
 
-export const AppFood = memo(AppFoodImpl)
+export const AppFood = memo(AppFoodImpl, (prev, curr) => prev.detail.id === curr.detail.id)

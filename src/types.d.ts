@@ -8,13 +8,13 @@ interface IUser {
 }
 
 interface IFoodItem {
-  score: number;
-  NER: string[];
-  title: string;
-  ingredients: string[];
-  directions: string[];
-  link: string;
-  index: number;
+  nER: string;
+	directions: string;
+	id: number;
+	ingredients: string;
+	link: string;
+	score: number;
+	title: string;
 }
 
 interface IFoodItemRequest {

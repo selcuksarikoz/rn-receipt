@@ -14,14 +14,5 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     backgroundColor: "#ddd"
-  },
-  wrapper: {
-    padding: 10,
-    flex:1,
-  },
-  title: {
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row"
   }
 })
