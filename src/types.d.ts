@@ -8,10 +8,10 @@ interface IUser {
 }
 
 interface IFoodItem {
-  nER: string;
-	directions: string;
+  NER: string[];
+	directions: string[];
 	id: number;
-	ingredients: string;
+	ingredients: string[];
 	link: string;
 	score: number;
 	title: string;

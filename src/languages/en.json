@@ -1,5 +1,6 @@
 {
   "Search": "Search",
+  "Loading": "Loading",
   "FoodAddPlaceholder": "Add material...",
   "UsernamePlaceholder": "Username example@domain.com",
   "Username": "Username",
@@ -8,5 +9,14 @@
   "Register": "Register",
   "ForgotPassword": "ForgotPassword",
   "EmailAddress": "Email Address",
-  "AddMaterialAndSearch": "Add Material And Search"
+  "AddMaterialAndSearch": "Add Material And Search",
+  "YouDontHaveFavoriteds": "You don't have favoriteds",
+  "Home": "Home",
+  "Favoriteds": "Favoriteds",
+  "Settings": "Settings",
+  "Ingredients" : "Ingredients",
+  "Directions" : "Directions",
+  "Materials": "Materials",
+  "Enjoy": "Enjoy!",
+  "Back": "Back"
 }

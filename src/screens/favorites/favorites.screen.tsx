@@ -1,9 +1,10 @@
-import { useEffect, useLayoutEffect, useState } from "react";
-import { Center, ScrollView, Text, VStack, View } from "native-base";
+import { useEffect, useState } from "react";
+import { Center, FlatList, ScrollView, Text, VStack, View } from "native-base";
 
-import { AppFood, AppSafeAreaView } from "@components";
+import { AppEmpty, AppFood, AppSafeAreaView } from "@components";
 import { LocalCache } from "@utils/local-cache";
 import { FavoritesModule } from "@screens/favorites/favorites.interface";
+import { Lang } from "@utils";
 
 export function AppFavoritesScreen(props: FavoritesModule.IFavoritesProps) {
 
@@ -22,20 +23,25 @@ export function AppFavoritesScreen(props: FavoritesModule.IFavoritesProps) {
     }
   }
 
+  function onPress(params: IFoodItem) {
+    navigation.push("Detail", params)
+  }
+
   return (
     <AppSafeAreaView>
-      <ScrollView flex={2}>
-        <VStack space={3} p={3}>
-          {
-            !foods.length ?
-              <Center flex={1}>
-                <Text>You haven't favoriteds yet...</Text>
-              </Center>
-
-              : foods.map(it => <AppFood detail={it} key={it.id} />)
-          }
-        </VStack>
-      </ScrollView>
+      <FlatList
+        columnWrapperStyle={{
+          gap: 10,
+          marginBottom: 20
+        }}
+        numColumns={2}
+        p={4}
+        data={foods}
+        renderItem={({ item }) => <AppFood detail={item} onPress={onPress} />}
+        // ItemSeparatorComponent={() => <View style={{ marginBottom: 15, marginTop: 15 }} />}
+        keyExtractor={item => item.id.toString()}
+        ListEmptyComponent={<AppEmpty title={Lang.t("AddMaterialAndSearch")} />}
+      />
     </AppSafeAreaView>
   )
 }

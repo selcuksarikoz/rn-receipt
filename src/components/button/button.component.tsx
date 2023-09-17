@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Text, View, TouchableOpacity, GestureResponderEvent } from "react-native";
 
 import { ButtonModule } from "./button.interface";
+import { Lang } from "@utils";
 
 import { styles } from "./button.style"
-import { useState } from "react";
 
 export function AppButton(props: ButtonModule.IButtonProps) {
   const { text, color = "primary", leftIcon, rightIcon, onPress, ...rest } = props
@@ -35,7 +36,7 @@ export function AppButton(props: ButtonModule.IButtonProps) {
     >
       {
         isLoading ? (
-          <Text>Loading...</Text>
+          <Text>{Lang.t("Loading")}</Text>
         ) : (
           <>
             {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}

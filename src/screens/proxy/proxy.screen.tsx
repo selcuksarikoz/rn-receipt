@@ -1,11 +1,14 @@
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider } from "native-base";
 import Icon from "react-native-ionicons";
+import { I18nextProvider } from "react-i18next";
+import { Colors } from "@constants";
+import { Lang } from "@utils";
 
 import { AppHomeScreen, AppFavoritesScreen, AppSettingsScreen, AppLoginScreen, AppRegisterScreen, AppDetailScreen } from "@screens";
-import { Colors } from "@constants";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -17,6 +20,7 @@ function HomeScreenTabs() {
         name="Home"
         component={AppHomeScreen}
         options={{
+          title: Lang.t("Home"),
           tabBarIcon: ({ color, focused }) => <Icon color={focused ? Colors.border : "#ddd"} size={20} name="home" />,
           headerShown: false
         }}
@@ -25,6 +29,7 @@ function HomeScreenTabs() {
         name="Favorites"
         component={AppFavoritesScreen}
         options={{
+          title: Lang.t("Favoriteds"),
           tabBarIcon: ({ color, focused }) => <Icon color={focused ? Colors.border : "#ddd"} size={20} name="star" />,
         }}
       />
@@ -32,6 +37,7 @@ function HomeScreenTabs() {
         name="Settings"
         component={AppSettingsScreen}
         options={{
+          title: Lang.t("Settings"),
           tabBarIcon: ({ color, focused }) => <Icon color={focused ? Colors.border : "#ddd"} size={20} name="cog" />,
         }}
       />
@@ -42,20 +48,26 @@ function HomeScreenTabs() {
 export function AppProxyScreen() {
   return (
     <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          {/* <Stack.Screen name="Login" component={AppLoginScreen} options={{
+      <I18nextProvider i18n={Lang}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerBackTitle: Lang.t("Back")
+            }}
+          >
+            {/* <Stack.Screen name="Login" component={AppLoginScreen} options={{
             headerShown: false
           }}/>
           <Stack.Screen name="Register" component={AppRegisterScreen} /> */}
-          <Stack.Screen
-            name="Main"
-            component={HomeScreenTabs}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Detail" component={AppDetailScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Screen
+              name="Main"
+              component={HomeScreenTabs}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Detail" component={AppDetailScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </I18nextProvider>
     </NativeBaseProvider>
   );
 }
